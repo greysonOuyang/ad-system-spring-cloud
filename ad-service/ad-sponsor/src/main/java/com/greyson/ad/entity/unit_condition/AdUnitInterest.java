@@ -28,11 +28,11 @@ public class AdUnitInterest {
     private Long unitId;
 
     @Basic
-    @Column(name = "it_tag", nullable = false)
-    private String itTag;
+    @Column(name = "interest_tag", nullable = false)
+    private String interestTag;
 
-    public AdUnitInterest(Long unitId, String itTag) {
+    public AdUnitInterest(Long unitId, String interestTag) {
         this.unitId = unitId;
-        this.itTag = itTag;
+        this.interestTag = interestTag;
     }
 }
