@@ -36,8 +36,6 @@ public class AccessLogFilter extends ZuulFilter {
         Long startTime = (Long) ctx.get("startTime");
         String uri = request.getRequestURI();
         long duration = System.currentTimeMillis() -startTime;
-
-        final Logger log = LoggerFactory.getLogger(getClass());
         log.info("uri: " + uri + ",duration: " + duration / 100 + "ms");
 
         return null;

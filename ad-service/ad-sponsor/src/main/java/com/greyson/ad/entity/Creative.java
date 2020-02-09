@@ -53,7 +53,7 @@ public class Creative {
      */
     @Basic
     @Column(name = "size", nullable = false)
-    private Integer size;
+    private Long size;
 
     /**
      * 持续时长，只有视频不为0
