@@ -1,0 +1,27 @@
+server:
+  port: 7000
+  servlet:
+    context-path: /ad-sponsor
+
+spring:
+  application:
+    name: eureka-client-ad-sponsor
+  jpa:
+    show-sql: true
+    hibernate:
+      ddlAuto: none
+    properties:
+      hibernate.format_sql: true
+    open-in-view: false
+  datasource:
+    data-username: root
+    data-password: HotteMYSQL
+    url: jdbc:mysql:/127.0.0.1:3306/ad_system_data?autoReconnect=true
+    tomcat:
+      max-active: 4
+      min-idle: 2
+      initial-size: 2
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8000/eureka/
