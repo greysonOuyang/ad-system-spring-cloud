@@ -5,6 +5,9 @@ import com.greyson.ad.annotation.IgnoreReponseAdvice;
 import com.greyson.ad.client.SponsorClient;
 import com.greyson.ad.client.vo.AdPlan;
 import com.greyson.ad.client.vo.AdPlanGetRequest;
+import com.greyson.ad.search.ISearch;
+import com.greyson.ad.search.vo.SearchRequest;
+import com.greyson.ad.search.vo.SearchResponse;
 import com.greyson.ad.vo.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +24,26 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class SearcController {
+public class SearchController {
+
+    private final ISearch search;
 
     private final RestTemplate restTemplate;
 
     private final SponsorClient sponsorClient;
 
     @Autowired
-    public SearcController(RestTemplate restTemplate, SponsorClient sponsorClient) {
+    public SearchController(ISearch search, RestTemplate restTemplate, SponsorClient sponsorClient) {
+        this.search = search;
         this.restTemplate = restTemplate;
         this.sponsorClient = sponsorClient;
+    }
+
+    @PostMapping("/fetchAds")
+    public SearchResponse fetchAds(@RequestBody SearchRequest request) {
+        log.info("ad-search: fetchAds -> {}",
+                JSON.toJSONString(request));
+        return search.fetchAds(request);
     }
 
     @IgnoreReponseAdvice

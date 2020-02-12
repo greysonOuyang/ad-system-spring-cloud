@@ -1,12 +1,12 @@
 package com.greyson.ad.index.creativeunit;
 
 import com.greyson.ad.index.IndexAware;
+import com.greyson.ad.index.adunit.AdUnitObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -80,5 +80,17 @@ public class CreativeUnitIndex implements IndexAware<String, CreativeUnitObject>
             creativeSet = new ConcurrentSkipListSet<>();
             creativeUnitMap.remove(value.getAdId());
         }
+    }
+
+    public List<Long> selectAds(List<AdUnitObject> unitObjects) {
+        if (CollectionUtils.isEmpty(unitObjects)) return Collections.emptyList();
+        List<Long> result = new ArrayList<>();
+        unitObjects.forEach(x->{
+            Set<Long> longs = unitCreativeMap.get(x.getUnitId());
+            if (CollectionUtils.isNotEmpty(longs)) {
+                result.addAll(longs);
+            }
+        });
+        return result;
     }
 }

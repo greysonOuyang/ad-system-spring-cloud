@@ -31,7 +31,7 @@ public class ParseTemplate {
             template1.tableTemplateMap.put(name, tableTemplate);
             // 遍历操作类型对应的列
             Map<OpType, List<String>> opTypeFieldSetMap =
-                    tableTemplate.getOpTypeFilterMap();
+                    tableTemplate.getOpTypeFieldSetMap();
              for (JsonTable.Column column : table.getInsert()) {
                  getAndCreateIfNeed(
                          OpType.ADD,

@@ -2,9 +2,10 @@ package com.greyson.ad.index.adunit;
 
 import com.greyson.ad.index.IndexAware;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -19,6 +20,33 @@ public class AdUnitIndex implements IndexAware<Long, AdUnitObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    public static Set<Long> match(Integer positionType) {
+        Set<Long> adUnitIds = new HashSet<>();
+        // 遍历寻找是否有符合条件的推广单元
+        objectMap.forEach((k, v) -> {
+            if (AdUnitObject.isAdSlotTypeOk(positionType, v.getPosiitionType())) {
+                adUnitIds.add(k);
+            }
+        });
+        return adUnitIds;
+    }
+
+    public List<AdUnitObject> fetch(Collection<Long> adUnitIds) {
+        if (CollectionUtils.isEmpty(adUnitIds)) {
+            return Collections.emptyList();
+        }
+        List<AdUnitObject> result = new ArrayList<>();
+        adUnitIds.forEach(u -> {
+            AdUnitObject object = get(u);
+            if (object == null) {
+                log.error("AdUnitObject not found: {}", u);
+                return;
+            }
+            result.add(object);
+        });
+        return result;
     }
 
     @Override

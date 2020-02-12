@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class AdCreativeUnitTable {
 
     private Long adId;
-    private Long unidId;
+    private Long unitId;
 }

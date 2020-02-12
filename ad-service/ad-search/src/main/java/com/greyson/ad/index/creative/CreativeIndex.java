@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -24,6 +22,27 @@ public class CreativeIndex implements IndexAware<Long, CreativeObject> {
 
     static {
         objectMap = new ConcurrentHashMap<>();
+    }
+
+    public List<CreativeObject> fetch(Collection<Long> adIds) {
+
+        if (CollectionUtils.isEmpty(adIds)) {
+            return Collections.emptyList();
+        }
+
+        List<CreativeObject> result = new ArrayList<>();
+
+        adIds.forEach(u -> {
+            CreativeObject object = get(u);
+            if (null == object) {
+                log.error("CreativeObject not found: {}", u);
+                return;
+            }
+
+            result.add(object);
+        });
+
+        return result;
     }
     @Override
     public CreativeObject get(Long key) {

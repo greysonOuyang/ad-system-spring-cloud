@@ -21,7 +21,7 @@ public class TableTemplate {
     private String tableName;
     private String level;
 
-    private Map<OpType, List<String>> opTypeFilterMap = new HashedMap<>();
+    private Map<OpType, List<String>> opTypeFieldSetMap = new HashedMap<>();
 
     // 字段索引 -> 字段名
     private Map<Integer, String> posMap = new HashedMap<>();

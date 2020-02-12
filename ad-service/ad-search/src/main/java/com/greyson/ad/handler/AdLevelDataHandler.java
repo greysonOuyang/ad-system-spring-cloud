@@ -99,7 +99,7 @@ public class AdLevelDataHandler {
         }
         AdUnitObject unitObject = DataTable.of(
                 AdUnitIndex.class
-        ).get(creativeUnitTable.getUnidId());
+        ).get(creativeUnitTable.getUnitId());
         CreativeObject creativeObject = DataTable.of(
                 CreativeIndex.class
         ).get(creativeUnitTable.getAdId());
@@ -111,11 +111,11 @@ public class AdLevelDataHandler {
         }
         CreativeUnitObject creativeUnitObject = new CreativeUnitObject(
                 creativeUnitTable.getAdId(),
-                creativeUnitTable.getUnidId()
+                creativeUnitTable.getUnitId()
         );
         handleBinlogEvent(
                 DataTable.of(CreativeUnitIndex.class),
-                CommonUtils.stringConcat(
+                CommonUtils.stringContact(
                         creativeUnitObject.getAdId().toString(),
                         creativeUnitObject.getUnitId().toString()
                 ),
@@ -138,7 +138,7 @@ public class AdLevelDataHandler {
                     unitDistrictTable.getUnitId());
             return;
         }
-        String key = CommonUtils.stringConcat(
+        String key = CommonUtils.stringContact(
                 unitDistrictTable.getProvince(),
                 unitDistrictTable.getCity()
         );

@@ -1,6 +1,5 @@
 package com.greyson.ad.index;
 
-import com.greyson.ad.index.creativeunit.CreativeUnitIndex;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
